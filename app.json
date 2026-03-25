@@ -7,14 +7,14 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/arkiveTransparent.png",
+    "icon": "./assets/vocatrns.png",
     "userInterfaceStyle": "light",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "newArchEnabled": false,
     "splash": {
-      "image": "./assets/arkiveTransparent.png",
+      "image": "./assets/vocatrns.png",
       "resizeMode": "contain",
       "backgroundColor": "#121212"
     },

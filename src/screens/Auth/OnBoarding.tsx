@@ -16,6 +16,7 @@ import { scale, verticalScale } from "react-native-size-matters";
 import { StyleSheet } from "react-native";
 import { useAppDispatch } from "src/redux/hooks";
 import { setToken } from "src/redux/features/auth/authSlice";
+import PrimaryButton from "src/components/shared/PrimaryButton";
 
 const OnBoarding = () => {
   const navigation = useNavigation()
@@ -37,7 +38,7 @@ const OnBoarding = () => {
 
   const onGoogleButtonPress = async () => {
     setGoogleLoading(true);
-    
+
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
@@ -91,40 +92,35 @@ const OnBoarding = () => {
           </View>
 
 
-          <TouchableOpacity className="mt-5 mb-2 border border-[#FFFFFF] w-full items-center p-3 rounded-lg" onPress={() => navigation.navigate("Login Screen")}>
-            <Text className="text-white text-lg font-instrumentSansBold">Log In</Text>
-          </TouchableOpacity>
+          <PrimaryButton
+            title="Log In"
+            onPress={() => navigation.navigate("Login Screen")}
+            className="mt-5 mb-2 border border-white"
+          />
 
-
-
-          <TouchableOpacity className="mt-2 mb-2 border border-[#FFFFFF] w-full items-center p-3 rounded-lg" onPress={() => navigation.navigate("Sign Up as User")}>
-            <Text className="text-white font-instrumentSansBold">Sign Up</Text>
-          </TouchableOpacity>
+          <PrimaryButton
+            title="Sign Up"
+            onPress={() => navigation.navigate("Sign Up as User")}
+            className="mt-2 mb-2 border border-white"
+          />
           <View className="flex-row items-center w-full my-3">
             <View className="flex-1 h-px bg-white/20" />
             <Text className="text-white/40 text-xs font-medium mx-3 tracking-widest">OR</Text>
             <View className="flex-1 h-px bg-white/20" />
           </View>
-          <TouchableOpacity
-            style={styles.googleButton}
+          <PrimaryButton
+            title="Continue with Google"
             onPress={onGoogleButtonPress}
-            disabled={googleLoading}
-            className="flex-row items-center justify-center bg-white rounded-lg"
-          >
-            {googleLoading ? (
-              <ActivityIndicator size="small" color="#000" />
-            ) : (
-              <>
-                <Image
-                  source={require('../../../assets/home/google.webp')} // add a google icon asset
-                  style={{ width: 20, height: 20, marginRight: 10 }}
-                />
-                <Text style={{ color: '#000', fontWeight: '600', fontSize: 16 }}>
-                  Continue with Google
-                </Text>
-              </>
-            )}
-          </TouchableOpacity>
+            loading={googleLoading}
+            className="bg-white"
+            textClass="text-black font-semibold"
+            icon={
+              <Image
+                source={require('../../../assets/home/google.webp')}
+                style={{ width: 20, height: 20 }}
+              />
+            }
+          />
         </View>
       </ImageBackground>
     </SafeAreaView>

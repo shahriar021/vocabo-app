@@ -7,6 +7,8 @@ import { setToken, setUserInfo } from "src/redux/features/auth/authSlice";
 import { useLoginMutation } from "src/redux/features/auth/authApi";
 import { useAuth } from "src/hooks/useAuth";
 import { validateEmail } from 'src/components/shared/verifyEmail';
+import PrimaryButton from "src/components/shared/PrimaryButton";
+import InputField from "src/components/shared/InputField";
 
 const LoginScreen = () => {
   const { login } = useAuth();
@@ -77,38 +79,33 @@ const LoginScreen = () => {
           It is quick and easy to log in. Enter your email and password below.
         </Text>
 
-        <View className="bg-[#2C2C2C] mt-3 mb-2 rounded-lg overflow-hidden flex-row items-center p-2">
-          <TextInput
-            className="flex-1"
-            placeholder="Enter your email address"
-            onChangeText={setEmail}
-            placeholderTextColor={"#ADAEBC"}
-            style={{ color: "#ADAEBC" }}
-          />
-        </View>
-        <View className="bg-[#2C2C2C] mt-3 mb-2 rounded-lg overflow-hidden flex-row items-center p-2">
-          <TextInput
-            className="flex-1"
-            placeholder="Enter Password"
-            onChangeText={setPassword}
-            placeholderTextColor={"#ADAEBC"}
-            style={{ color: "#ADAEBC" }}
-            secureTextEntry={!isVisible}
-          />
-          <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
-            {isVisible ? <Feather name="eye-off" size={24} color="gray" /> : <Feather name="eye" size={24} color="gray" />}
-          </TouchableOpacity>
-        </View>
+        <InputField
+          placeholder="Enter your email address"
+          value={email}
+          onChangeText={setEmail}
+        />
+
+        <InputField
+          placeholder="Enter Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          showToggle
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
+        />
 
         <TouchableOpacity className="mt-1 mb-3 items-center" onPress={() => navigation.navigate("Sign Up as User")}>
           <Text className="text-[#979797] text-xl font-instrumentSansBold">I don’t have an account</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity className="mt-1 mb-3 items-center bg-[#fff] p-3 rounded-lg " onPress={handleLogin}>
-          <Text className="text-[#000] text-xl font-instrumentSansBold">
-            {loading ? <ActivityIndicator size={"small"} color={"green"} /> : "login"}
-          </Text>
-        </TouchableOpacity>
+        <PrimaryButton
+          title="Login"
+          onPress={handleLogin}
+          loading={loading}
+          className="mt-1 mb-3 bg-white"
+          textClass="text-black text-xl"
+        />
       </View>
     </View>
   );

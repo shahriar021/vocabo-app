@@ -6,6 +6,8 @@ import { Feather } from "@expo/vector-icons";
 import { validateEmail } from "src/components/shared/verifyEmail";
 import { setToken } from "src/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
+import PrimaryButton from "src/components/shared/PrimaryButton";
+import InputField from "src/components/shared/InputField";
 
 const SignUpUser = () => {
   const navigation = useNavigation<any>();
@@ -14,6 +16,7 @@ const SignUpUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
 
   const dispatch = useDispatch()
 
@@ -76,31 +79,41 @@ const SignUpUser = () => {
     <ScrollView style={{ flex: 1, backgroundColor: "#121212", padding: 20 }}>
       <Text style={{ color: "white", fontSize: 24, fontWeight: "bold", marginBottom: 20 }}>Sign Up</Text>
 
-      <TextInput
+      <InputField
         placeholder="Email"
-        placeholderTextColor="#aaa"
-        keyboardType="email-address"
-        style={{ backgroundColor: "#2C2C2C", color: "white", marginBottom: 10, padding: 12, borderRadius: 8 }}
+        value={email}
         onChangeText={setEmail}
-      />
-      <TextInput
-        placeholder="Password"
-        placeholderTextColor="#aaa"
-        secureTextEntry
-        style={{ backgroundColor: "#2C2C2C", color: "white", marginBottom: 10, padding: 12, borderRadius: 8 }}
-        onChangeText={setPassword}
-      />
-      <TextInput
-        placeholder="Confirm Password"
-        placeholderTextColor="#aaa"
-        secureTextEntry
-        style={{ backgroundColor: "#2C2C2C", color: "white", marginBottom: 20, padding: 12, borderRadius: 8 }}
-        onChangeText={setConfirmPassword}
+        keyboardType="email-address"
       />
 
-      <TouchableOpacity onPress={handleSignUpUser} style={{ backgroundColor: "white", padding: 14, borderRadius: 8, alignItems: "center" }}>
-        <Text style={{ color: "#121212", fontSize: 18, fontWeight: "bold" }}>{loading ? <ActivityIndicator color={"black"} size={"small"} /> : "Create Account"}</Text>
-      </TouchableOpacity>
+      <InputField
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+          showToggle
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
+      />
+
+      <InputField
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
+        secureTextEntry
+          showToggle
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
+      />
+
+      <PrimaryButton
+        title="Create Account"
+        onPress={handleSignUpUser}
+        loading={loading}
+        className="bg-white mt-2 mb-3"
+        textClass="text-[#121212] text-xl"
+
+      />
     </ScrollView>
   );
 };
