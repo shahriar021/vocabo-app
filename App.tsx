@@ -7,12 +7,13 @@ import MainLayout from "./src/components/layout/MainLayout";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ActivityIndicator, View } from "react-native";
-
+import { NetworkProvider } from "./src/components/context/NetworkContext"
 
 export default function App() {
 
   return (
     <SafeAreaProvider>
+      <NetworkProvider>
       <GestureHandlerRootView>
           <Provider store={store}>
             <PersistGate loading={
@@ -25,6 +26,7 @@ export default function App() {
             </PersistGate>
           </Provider>
       </GestureHandlerRootView>
+      </NetworkProvider>
     </SafeAreaProvider>
   );
 }

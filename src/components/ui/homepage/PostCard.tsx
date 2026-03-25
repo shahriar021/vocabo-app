@@ -5,24 +5,17 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "src/redux/hooks";
 import { toggleLike } from "src/redux/features/post/postSlice";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "src/types/navigation";
+import { Post } from "src/types";
 
-type Post = {
-  id: number;
-  title: string;
-  body: string;
-  userId: number;
-  totalReacts?: number;
-  totalComments?: number;
-  attachment?: string[];
-  caption?: string;
-};
+type NavigationProp = StackNavigationProp<RootStackParamList, "Post Details">
 
 const PostCard = ({ item }: { item: Post }) => {
   const [showComments, setShowComments] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const dispatch = useAppDispatch();
 
-  // Read from Redux
   const likeState = useAppSelector((state) => state.post?.likes[item.id]);
   const isLiked = likeState?.isLiked ?? false;
   const likeCount = likeState?.count ?? (item.totalReacts ?? 0);
@@ -41,9 +34,7 @@ const PostCard = ({ item }: { item: Post }) => {
         </Text>
       </TouchableOpacity>
 
-      {/* Actions Bar */}
       <View className="flex-row justify-between items-center p-2 bg-[#121212] rounded-lg mt-2">
-        {/* Like Button */}
         <TouchableOpacity
           className={`${isLiked ? "bg-[#FF4B4B]" : ""} p-1 items-center rounded-xl`}
           onPress={handleLike}
@@ -53,7 +44,6 @@ const PostCard = ({ item }: { item: Post }) => {
         </TouchableOpacity>
 
         <View className="flex-row items-center gap-2">
-          {/* Comment Button */}
           <TouchableOpacity
             className="items-center justify-center"
             onPress={() => setShowComments((prev) => !prev)}
@@ -62,7 +52,6 @@ const PostCard = ({ item }: { item: Post }) => {
             <Text className="text-white mt-1">{commentCount}</Text>
           </TouchableOpacity>
 
-          {/* Share Button */}
           <TouchableOpacity className="p-2 rounded-full items-center justify-center gap-1">
             <FontAwesome5 name="share" size={18} color="white" />
             <Text className="text-white">Share</Text>

@@ -2,7 +2,6 @@ import { authInstance } from "../../firebaseConfig";
 
 export const signUpUser = async (email: string, password: string) => {
   try {
-    // Native SDK calls the method on the auth instance
     const userCredential = await authInstance.createUserWithEmailAndPassword(email, password);
     return userCredential.user;
   } catch (error: any) {

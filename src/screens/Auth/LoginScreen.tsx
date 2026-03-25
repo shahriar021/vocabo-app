@@ -1,18 +1,21 @@
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { useLayoutEffect, useState } from "react";
-import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {  Alert, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { setToken, setUserInfo } from "src/redux/features/auth/authSlice";
-import { useLoginMutation } from "src/redux/features/auth/authApi";
 import { useAuth } from "src/hooks/useAuth";
 import { validateEmail } from 'src/components/shared/verifyEmail';
 import PrimaryButton from "src/components/shared/PrimaryButton";
 import InputField from "src/components/shared/InputField";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "src/types";
+
+type NavigationProp = StackNavigationProp<RootStackParamList>
 
 const LoginScreen = () => {
   const { login } = useAuth();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState(false);

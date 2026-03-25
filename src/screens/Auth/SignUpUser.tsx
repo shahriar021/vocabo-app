@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert, ScrollView, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, Alert, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "src/hooks/useAuth";
 import { Feather } from "@expo/vector-icons";

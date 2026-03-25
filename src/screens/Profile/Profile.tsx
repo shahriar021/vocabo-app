@@ -5,9 +5,10 @@ import { useNavigation } from '@react-navigation/native'
 import { useAppSelector, useAppDispatch } from 'src/redux/hooks'
 import auth from '@react-native-firebase/auth'
 import { setToken } from 'src/redux/features/auth/authSlice'
+import { FirebaseUserInfo } from 'src/types'
 
 const Profile = () => {
-  const userInfo = useAppSelector((state) => state.auth.userInfo)
+  const userInfo:FirebaseUserInfo | null = useAppSelector((state) => state.auth.userInfo)
   const navigation = useNavigation()
   const dispatch = useAppDispatch()
 
@@ -47,7 +48,6 @@ const Profile = () => {
     ]);
   };
 
-  // ── Derived values from Firebase user ──
   const displayName = userInfo?.displayName ?? "No Name"
   const email = userInfo?.email ?? ""
   const photoURL = userInfo?.photoURL
@@ -63,7 +63,6 @@ const Profile = () => {
   return (
     <View className="flex-1 bg-[#121212] px-5 pt-4">
 
-      {/* ── Avatar ── */}
       <View className="items-center mt-4 mb-6">
         {photoURL ? (
           <Image
@@ -79,7 +78,6 @@ const Profile = () => {
         <Text className="text-white text-xl font-bold">{displayName}</Text>
         <Text className="text-[#888] text-sm mt-1">{email}</Text>
 
-        {/* Email verified badge */}
         <View className={`flex-row items-center gap-1 mt-2 px-3 py-1 rounded-full ${isEmailVerified ? "bg-green-900/40" : "bg-yellow-900/40"}`}>
           <Ionicons
             name={isEmailVerified ? "checkmark-circle" : "alert-circle"}
@@ -92,10 +90,8 @@ const Profile = () => {
         </View>
       </View>
 
-      {/* ── Divider ── */}
       <View className="h-px bg-[#1E1E1E] mb-6" />
 
-      {/* ── Account Info ── */}
       <Text className="text-[#555] text-xs font-semibold uppercase tracking-widest mb-3">Account Info</Text>
 
       <View className="bg-[#1A1A1A] rounded-2xl overflow-hidden mb-6">
@@ -132,12 +128,9 @@ const Profile = () => {
 
       </View>
 
-      {/* ── Actions ── */}
       <Text className="text-[#555] text-xs font-semibold uppercase tracking-widest mb-3">Actions</Text>
 
       <View className="bg-[#1A1A1A] rounded-2xl overflow-hidden">
-
-       
 
         <TouchableOpacity
           className="flex-row items-center px-4 py-3"

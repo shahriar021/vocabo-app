@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { FirebaseUserInfo } from "src/types/profile";
 
 export type TUser = {
 
@@ -37,9 +38,9 @@ type TAuthData = {
   companyAuth: null | string;
   EXPO_PUBLIC_BASE_URL: string | null;
   userType: string | null;
-  token: boolean;
+  token: string | null
   loading: boolean;
-  userInfo:string | null
+  userInfo: FirebaseUserInfo | null
 };
 
 const initialState: TAuthData = {
@@ -50,7 +51,7 @@ const initialState: TAuthData = {
   companyAuth: null,
   EXPO_PUBLIC_BASE_URL: null,
   userType: null,
-  token: false,
+  token: null,
   loading: false,
   userInfo:null
 };
@@ -76,13 +77,13 @@ const authSlice = createSlice({
     setUserType: (state, action) => {
       state.userType = action.payload;
     },
-    setToken: (state, action) => {
+    setToken: (state, action: PayloadAction<string | null>) => {
       state.token = action.payload;
     },
     setCamLoading: (state, action) => {
       state.loading = action.payload;
     },
-    setUserInfo:(state,action)=>{
+    setUserInfo:(state, action: PayloadAction<FirebaseUserInfo | null>)=>{
       state.userInfo=action.payload
     }
   },

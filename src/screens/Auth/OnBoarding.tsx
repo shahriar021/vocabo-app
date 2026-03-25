@@ -1,25 +1,27 @@
 import {
   View,
   Text,
-  TouchableOpacity,
   Image,
   ImageBackground,
-  ActivityIndicator,
   Alert,
 } from "react-native";
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
+import {  useNavigation } from "@react-navigation/native";
 import { scale, verticalScale } from "react-native-size-matters";
 import { StyleSheet } from "react-native";
 import { useAppDispatch } from "src/redux/hooks";
 import { setToken } from "src/redux/features/auth/authSlice";
 import PrimaryButton from "src/components/shared/PrimaryButton";
+import { RootStackParamList } from "src/types/navigation";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type NavigationProp = StackNavigationProp<RootStackParamList>
 
 const OnBoarding = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<NavigationProp>()
   const [googleLoading, setGoogleLoading] = useState(false);
   const dispatch = useAppDispatch();
 
