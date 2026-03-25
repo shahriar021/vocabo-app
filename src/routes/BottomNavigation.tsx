@@ -5,6 +5,7 @@ const BottomTabs = createBottomTabNavigator();
 import { TouchableOpacity } from 'react-native';
 import { HomeScreen } from "src/screens";
 import { DrawerNavigation } from "./DrawerNavigation";
+import Profile from "src/screens/Profile/Profile";
 
 const CustomTabBarButton = ({ children, onPress, accessibilityState }: any) => {
   const focused = accessibilityState?.selected;
@@ -42,7 +43,7 @@ export const BottomNavigation = () => {
             marginBottom: Platform.OS === "android" ? 10 : 16,
             paddingBottom: 7,
             height: 72,
-            backgroundColor: "#252525",
+            backgroundColor: "#121212",
             overflow: "hidden"
           },
           tabBarLabelStyle: {
@@ -68,7 +69,7 @@ export const BottomNavigation = () => {
           name="Home"
           component={HomeScreen}
           options={{
-            headerShown: false,
+            headerShown: true,
             headerTitle: () => null,
             tabBarIcon: ({ focused }) => (
               <View style={{ alignItems: "center" }} className="">
@@ -81,10 +82,10 @@ export const BottomNavigation = () => {
         />
         
         <BottomTabs.Screen
-          name="DrawerProfile"
-          component={DrawerNavigation}
+          name="Profile"
+          component={Profile}
           options={{
-            headerShown: false,
+            headerShown: true,
             tabBarIcon: ({ focused }) => (
               <View style={{ alignItems: "center" }} className="">
 

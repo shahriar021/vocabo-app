@@ -40,34 +40,34 @@ const OnBoarding = () => {
   }, [navigation]);
 
   const onGoogleButtonPress = async () => {
-  setGoogleLoading(true);
-  try {
-    await GoogleSignin.hasPlayServices();
-    const userInfo = await GoogleSignin.signIn();
-    
-    // New versions nest it under data.idToken
-    const idToken = userInfo.data?.idToken ?? userInfo.idToken;
-    
-    if (!idToken) {
-      throw new Error('No idToken returned from Google Sign-In');
-    }
+    setGoogleLoading(true);
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
 
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    const userCredential = await auth().signInWithCredential(googleCredential);
-    
-    const token = await userCredential.user.getIdToken();
-    dispatch(setToken(token));
-    Alert.alert("Success", "Logged in with Google!");
-  } catch (error: any) {
-    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-      Alert.alert("Cancelled", "Login was cancelled");
-    } else {
-      Alert.alert("Google Error", error.message);
+      // New versions nest it under data.idToken
+      const idToken = userInfo.data?.idToken ?? userInfo.idToken;
+
+      if (!idToken) {
+        throw new Error('No idToken returned from Google Sign-In');
+      }
+
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const userCredential = await auth().signInWithCredential(googleCredential);
+
+      const token = await userCredential.user.getIdToken();
+      dispatch(setToken(token));
+      Alert.alert("Success", "Logged in with Google!");
+    } catch (error: any) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        Alert.alert("Cancelled", "Login was cancelled");
+      } else {
+        Alert.alert("Google Error", error.message);
+      }
+    } finally {
+      setGoogleLoading(false);
     }
-  } finally {
-    setGoogleLoading(false);
-  }
-};
+  };
 
   return (
 
@@ -107,10 +107,10 @@ const OnBoarding = () => {
               <ActivityIndicator size="small" color="#000" />
             ) : (
               <>
-                {/* <Image
-                  source={require('../../../assets/e-icon/google-icon.png')} // add a google icon asset
+                <Image
+                  source={require('../../../assets/e-icon/google.webp')} // add a google icon asset
                   style={{ width: 20, height: 20, marginRight: 10 }}
-                /> */}
+                />
                 <Text style={{ color: '#000', fontWeight: '600', fontSize: 16 }}>
                   Continue with Google
                 </Text>
@@ -127,16 +127,16 @@ const OnBoarding = () => {
 
 const styles = StyleSheet.create({
   googleButton: {
-  width: 300,
-  height: 55,
-  marginTop: 20,
-  alignSelf: 'center',
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundColor: '#fff',
-  borderRadius: 8,
-},
+    width: "100%",
+    height: 55,
+    marginTop: 20,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 8,
+  },
 });
 
 export default OnBoarding;

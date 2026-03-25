@@ -39,6 +39,7 @@ type TAuthData = {
   userType: string | null;
   token: boolean;
   loading: boolean;
+  userInfo:string | null
 };
 
 const initialState: TAuthData = {
@@ -51,6 +52,7 @@ const initialState: TAuthData = {
   userType: null,
   token: false,
   loading: false,
+  userInfo:null
 };
 
 const authSlice = createSlice({
@@ -80,8 +82,11 @@ const authSlice = createSlice({
     setCamLoading: (state, action) => {
       state.loading = action.payload;
     },
+    setUserInfo:(state,action)=>{
+      state.userInfo=action.payload
+    }
   },
 });
 
-export const { setUser, setCompanyAuth, setBaseUrl, setUserType, setToken, setId, setCamLoading } = authSlice.actions;
+export const { setUser, setCompanyAuth, setBaseUrl, setUserType, setToken, setId, setCamLoading,setUserInfo } = authSlice.actions;
 export default authSlice.reducer;

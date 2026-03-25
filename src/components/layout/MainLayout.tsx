@@ -14,7 +14,6 @@ import * as Notifications from 'expo-notifications';
 
 const MainLayout = () => {
   const token = useAppSelector((state) => state.auth.token);
-  console.log(token,",looo");
   const [isSplashVisible, setIsSplashVisible] = useState(true);
 
 

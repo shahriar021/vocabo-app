@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { ActivityIndicator, Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
-import { setToken, setUserType, setId } from "src/redux/features/auth/authSlice";
+import { setToken, setUserType, setId, setUserInfo } from "src/redux/features/auth/authSlice";
 import { useLoginMutation } from "src/redux/features/auth/authApi";
 import { useAuth } from "src/hooks/useAuth";
 
@@ -108,6 +108,7 @@ const LoginScreen = () => {
       const user = await login(email, password); // from useAuth
       console.log(user, "user..");
       dispatch(setToken(await user.getIdToken())); // store token in Redux
+      dispatch(setUserInfo(user)); // store token in Redux
       Alert.alert("Login successful");
     } catch (err: any) {
       Alert.alert("Error", err.message);

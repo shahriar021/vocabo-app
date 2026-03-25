@@ -31,7 +31,7 @@ const StackNavigation = () => {
           name="BottomScreen"
           component={BottomNavigation}
           options={{
-            headerShown: true,
+            headerShown: false,
           }}
         />
         <Stack.Screen
