@@ -5,6 +5,7 @@ import {
   Animated,
   ImageBackground,
   Image,
+  View,
 } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
@@ -22,12 +23,20 @@ export default function SplashScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require("../../../../assets/e-icon/splashBack.jpeg")}
+        source={require("../../../../assets/home/splashBack.jpeg")}
         style={styles.fullImage}
         resizeMode="cover"
       >
         <Animated.View style={[styles.overlay, { opacity: fadeAnim }]}>
-          <Image source={require("../../../../assets/e-icon/ark.png")} style={{width:scale(200),height:verticalScale(200)}} resizeMode="contain"/>
+          <View className="w-full mb-6 bg-white/90 rounded-2xl px-4 py-3 items-start">
+            <View style={{ width: scale(200), height: verticalScale(40) }}>
+              <Image
+                source={require("../../../../assets/home/voc.png")}
+                style={{ width: "100%", height: "100%" }}
+                resizeMode="contain"
+              />
+            </View>
+          </View>
         </Animated.View>
       </ImageBackground>
     </SafeAreaView>

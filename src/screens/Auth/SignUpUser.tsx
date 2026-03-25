@@ -1,32 +1,74 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert, ScrollView } from "react-native";
+import React, { useLayoutEffect, useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, Alert, ScrollView, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "src/hooks/useAuth";
+import { Feather } from "@expo/vector-icons";
+import { validateEmail } from "src/components/shared/verifyEmail";
+import { setToken } from "src/redux/features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 const SignUpUser = () => {
   const navigation = useNavigation<any>();
   const { signUp } = useAuth();
-
+  const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const dispatch = useDispatch()
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: "#121212",
+      },
+      headerTintColor: "#FFFFFF",
+      headerTitle: () => null,
+      headerLeft: () => (
+        <TouchableOpacity className="flex-row gap-2 items-center" onPress={() => navigation.goBack()}>
+          <Feather name="arrow-left-circle" size={24} color="white" />
+          <View className="flex-col">
+            <Text className="font-instrumentSansBold text-white text-xl">Vocabo</Text>
+          </View>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+
   const handleSignUpUser = async () => {
-    if (!email || !password) {
-      Alert.alert("Please fill up all fields!");
+    if (!email.trim()) {
+      Alert.alert("Error", "Please enter your email address");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      Alert.alert("Error", "Please enter a valid email address");
+      return;
+    }
+
+    if (!password.trim()) {
+      Alert.alert("Error", "Please enter your password");
+      return;
+    }
+
+    if (password.length < 6) {
+      Alert.alert("Error", "Password must be at least 6 characters long");
       return;
     }
     if (password !== confirmPassword) {
       Alert.alert("Passwords do not match");
       return;
     }
-
+    setLoading(true)
     try {
-      await signUp(email, password);
+      const userCredential = await signUp(email, password);
+      const token = await userCredential.getIdToken();
+      dispatch(setToken(token));
       Alert.alert("User registered successfully");
-      navigation.navigate("OnBoarding" as never);
     } catch (err: any) {
       Alert.alert("Error", err.message);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -57,7 +99,7 @@ const SignUpUser = () => {
       />
 
       <TouchableOpacity onPress={handleSignUpUser} style={{ backgroundColor: "white", padding: 14, borderRadius: 8, alignItems: "center" }}>
-        <Text style={{ color: "#121212", fontSize: 18, fontWeight: "bold" }}>Create Account</Text>
+        <Text style={{ color: "#121212", fontSize: 18, fontWeight: "bold" }}>{loading ? <ActivityIndicator color={"black"} size={"small"} /> : "Create Account"}</Text>
       </TouchableOpacity>
     </ScrollView>
   );

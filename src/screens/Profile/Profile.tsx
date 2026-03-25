@@ -137,13 +137,7 @@ const Profile = () => {
 
       <View className="bg-[#1A1A1A] rounded-2xl overflow-hidden">
 
-        <TouchableOpacity className="flex-row items-center px-4 py-3 border-b border-[#242424]">
-          <View className="w-8 h-8 rounded-lg bg-[#242424] items-center justify-center mr-3">
-            <Ionicons name="create-outline" size={16} color="#888" />
-          </View>
-          <Text className="flex-1 text-white text-sm">Edit Profile</Text>
-          <Ionicons name="chevron-forward" size={16} color="#444" />
-        </TouchableOpacity>
+       
 
         <TouchableOpacity
           className="flex-row items-center px-4 py-3"

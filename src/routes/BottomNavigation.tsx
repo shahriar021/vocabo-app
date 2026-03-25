@@ -73,7 +73,7 @@ export const BottomNavigation = () => {
             headerTitle: () => null,
             tabBarIcon: ({ focused }) => (
               <View style={{ alignItems: "center" }} className="">
-                <Image source={require("../../assets/e-icon/home-olive.png")} style={{ width: 24, height: 24 }} />
+                <Image source={require("../../assets/home/home-olive.png")} style={{ width: 24, height: 24 }} />
                 {focused && <Text className="text-center w-[50]" style={{ color: "#2ECC71", fontSize: 10 }}>Home</Text>}
               </View>
             ),
@@ -89,7 +89,7 @@ export const BottomNavigation = () => {
             tabBarIcon: ({ focused }) => (
               <View style={{ alignItems: "center" }} className="">
 
-                <Image source={require("../../assets/e-icon/profile-olive.png")} style={{ width: 24, height: 24 }} />
+                <Image source={require("../../assets/home/profile-olive.png")} style={{ width: 24, height: 24 }} />
                 {focused && <Text className="text-center w-[50]" style={{ color: "#2ECC71", fontSize: 10 }}>Profile</Text>}
               </View>
             ),

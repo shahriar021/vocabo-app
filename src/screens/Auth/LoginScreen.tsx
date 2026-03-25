@@ -1,29 +1,21 @@
-import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth'; 
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import { ActivityIndicator, Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useLayoutEffect, useState } from "react";
+import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
-import { setToken, setUserType, setId, setUserInfo } from "src/redux/features/auth/authSlice";
+import { setToken, setUserInfo } from "src/redux/features/auth/authSlice";
 import { useLoginMutation } from "src/redux/features/auth/authApi";
 import { useAuth } from "src/hooks/useAuth";
+import { validateEmail } from 'src/components/shared/verifyEmail';
 
 const LoginScreen = () => {
   const { login } = useAuth();
   const navigation = useNavigation();
-  const [isType, setIsType] = useState<boolean>(false);
-  const [userTypes, setUserTypes] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
-  const [loginData] = useLoginMutation();
   const dispatch = useDispatch();
-
-
-
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -36,79 +28,39 @@ const LoginScreen = () => {
         <TouchableOpacity className="flex-row gap-2 items-center" onPress={() => navigation.goBack()}>
           <Feather name="arrow-left-circle" size={24} color="white" />
           <View className="flex-col">
-            <Text className="font-instrumentSansBold text-white text-xl">ARKIVE</Text>
+            <Text className="font-instrumentSansBold text-white text-xl">Vocabo</Text>
           </View>
         </TouchableOpacity>
       ),
     });
   }, [navigation]);
 
-  const validateEmail = (email: any) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-
-  // const handleLogin = async () => {
-  //     setLoading(true)
-  //     if (!userTypes) {
-  //         Alert.alert("Error", "Please select a user type");
-  //         return;
-  //     }
-
-  //     if (!email.trim()) {
-  //         Alert.alert("Error", "Please enter your email address");
-  //         return;
-  //     }
-
-  //     if (!validateEmail(email)) {
-  //         Alert.alert("Error", "Please enter a valid email address");
-  //         return;
-  //     }
-
-  //     if (!password.trim()) {
-  //         Alert.alert("Error", "Please enter your password");
-  //         return;
-  //     }
-
-  //     if (password.length < 6) {
-  //         Alert.alert("Error", "Password must be at least 6 characters long");
-  //         return;
-  //     }
-  //     const ldata = {
-  //         data: {
-  //             email: email,
-  //             password: password
-  //         }
-  //     }
-  //     try {
-  //         const res = await loginData(ldata).unwrap();
-  //         if(userTypes===res?.data?.role){
-  //             dispatch(setToken(res.data.accessToken));
-  //             dispatch(setUserType(userTypes));
-  //             if(res?.data?.id){
-  //                 dispatch(setId(res.data.id))
-  //             }
-  //             setLoading(false)
-  //             Alert.alert(res.message)
-  //         }else{
-  //             Alert.alert("There is a mismatch in user types,Please select your type carefully!")
-  //         }
-  //     } catch (err: any) {
-  //         setLoading(false)
-  //         const errorMessage = err?.data?.message || err?.message || "Something went wrong!";
-  //         Alert.alert("Error", errorMessage);
-  //     }
-  // };
-
-  
-
   const handleLogin = async () => {
+    if (!email.trim()) {
+      Alert.alert("Error", "Please enter your email address");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      Alert.alert("Error", "Please enter a valid email address");
+      return;
+    }
+
+    if (!password.trim()) {
+      Alert.alert("Error", "Please enter your password");
+      return;
+    }
+
+    if (password.length < 6) {
+      Alert.alert("Error", "Password must be at least 6 characters long");
+      return;
+    }
     setLoading(true);
     try {
-      const user = await login(email, password); // from useAuth
+      const user = await login(email, password);
       console.log(user, "user..");
-      dispatch(setToken(await user.getIdToken())); // store token in Redux
-      dispatch(setUserInfo(user)); // store token in Redux
+      dispatch(setToken(await user.getIdToken()));
+      dispatch(setUserInfo(user));
       Alert.alert("Login successful");
     } catch (err: any) {
       Alert.alert("Error", err.message);

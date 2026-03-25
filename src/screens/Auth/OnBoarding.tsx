@@ -7,12 +7,10 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import { scale, verticalScale } from "react-native-size-matters";
 import { StyleSheet } from "react-native";
@@ -25,8 +23,6 @@ const OnBoarding = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // Initialize inside the component
-
     GoogleSignin.configure({
       webClientId: '467343947871-khtlvmtl9v2o8fhhebf8u845qd1t2cg5.apps.googleusercontent.com',
       offlineAccess: true,
@@ -41,23 +37,22 @@ const OnBoarding = () => {
 
   const onGoogleButtonPress = async () => {
     setGoogleLoading(true);
+    
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-
-      // New versions nest it under data.idToken
       const idToken = userInfo.data?.idToken ?? userInfo.idToken;
-
       if (!idToken) {
         throw new Error('No idToken returned from Google Sign-In');
       }
 
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       const userCredential = await auth().signInWithCredential(googleCredential);
-
       const token = await userCredential.user.getIdToken();
+
       dispatch(setToken(token));
       Alert.alert("Success", "Logged in with Google!");
+
     } catch (error: any) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         Alert.alert("Cancelled", "Login was cancelled");
@@ -73,30 +68,43 @@ const OnBoarding = () => {
 
     <SafeAreaView className="flex-1 bg-[#121212] ">
       <ImageBackground
-        source={require("../../../assets/e-icon/ON.png")}
+        source={require("../../../assets/home/ON.png")}
         style={{ flex: 1, width: "100%", height: "100%" }}
         resizeMode="cover"
       >
         <View className="flex-1 items-center justify-end px-4 mb-5 p-3 ">
-          <View className="w-full">
-            <View style={{ width: scale(250), height: verticalScale(50) }} >
-              <Image source={require("../../../assets/e-icon/ark.png")} style={{ width: "100%", height: "100%" }} />
+          <View className="w-full mb-6 bg-white/90 rounded-2xl px-4 py-3 items-start">
+            <View style={{ width: scale(200), height: verticalScale(40) }}>
+              <Image
+                source={require("../../../assets/home/voc.png")}
+                style={{ width: "100%", height: "100%" }}
+                resizeMode="contain"
+              />
             </View>
           </View>
-          <View className=" w-full items-start mt-5">
-            <Text className="text-[#fff] font-instrumentSansBold text-5xl  ">One Platform, A Thousand Brands!</Text>
+
+          {/* Tagline */}
+          <View className="w-full mb-13">
+            <Text className="text-white font-instrumentSansBold text-3xl leading-9">
+              দেশের প্রথম এআই ভিত্তিক ইংরেজী শেখার প্ল্যাটফরম
+            </Text>
           </View>
 
 
-          <TouchableOpacity className="mt-20 mb-2 border border-[#FFFFFF] w-full items-center p-3 rounded-lg" onPress={() => navigation.navigate("Login Screen")}>
+          <TouchableOpacity className="mt-5 mb-2 border border-[#FFFFFF] w-full items-center p-3 rounded-lg" onPress={() => navigation.navigate("Login Screen")}>
             <Text className="text-white text-lg font-instrumentSansBold">Log In</Text>
           </TouchableOpacity>
 
 
 
           <TouchableOpacity className="mt-2 mb-2 border border-[#FFFFFF] w-full items-center p-3 rounded-lg" onPress={() => navigation.navigate("Sign Up as User")}>
-            <Text className="text-white font-instrumentSansBold">Sign Up as User</Text>
+            <Text className="text-white font-instrumentSansBold">Sign Up</Text>
           </TouchableOpacity>
+          <View className="flex-row items-center w-full my-3">
+            <View className="flex-1 h-px bg-white/20" />
+            <Text className="text-white/40 text-xs font-medium mx-3 tracking-widest">OR</Text>
+            <View className="flex-1 h-px bg-white/20" />
+          </View>
           <TouchableOpacity
             style={styles.googleButton}
             onPress={onGoogleButtonPress}
@@ -108,7 +116,7 @@ const OnBoarding = () => {
             ) : (
               <>
                 <Image
-                  source={require('../../../assets/e-icon/google.webp')} // add a google icon asset
+                  source={require('../../../assets/home/google.webp')} // add a google icon asset
                   style={{ width: 20, height: 20, marginRight: 10 }}
                 />
                 <Text style={{ color: '#000', fontWeight: '600', fontSize: 16 }}>
