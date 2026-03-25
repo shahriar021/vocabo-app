@@ -1,10 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { BottomNavigation } from "./BottomNavigation";
-
-
-import { ActivityIndicator } from "react-native";
-import { useAppSelector } from "src/redux/hooks";
+import PostDetails from "src/screens/Post/PostDetails";
 
 
 const Stack = createStackNavigator();
@@ -30,17 +27,20 @@ const StackNavigation = () => {
           headerTintColor: "#006400",
         }}
       >
-        {
-          <Stack.Screen
-            name="BottomScreen"
-            component={BottomNavigation}
-            options={{
-              headerShown: false,
-            }}
-          />
-        }
-       
-        
+        <Stack.Screen
+          name="BottomScreen"
+          component={BottomNavigation}
+          options={{
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen
+          name="Post Details"
+          component={PostDetails}
+          options={{
+            headerShown: true,
+          }}
+        />
       </Stack.Navigator>
     </>
   );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 type Post = {
   id: number;
@@ -19,6 +20,7 @@ const PostCard = ({ item }: { item: Post }) => {
   const [likeCount, setLikeCount] = useState(item.totalReacts ?? 0);
   const [showComments, setShowComments] = useState(false);
   const [commentCount] = useState(item.totalComments ?? 0);
+  const navigation = useNavigation()
 
   const handleLike = () => {
     setIsLiked((prev) => !prev);
@@ -31,10 +33,12 @@ const PostCard = ({ item }: { item: Post }) => {
 
   return (
     <View className="bg-white rounded-xl p-4 shadow-sm mx-4 mb-3">
-      <Text className="text-base font-bold text-gray-800 capitalize mb-2">{item.title}</Text>
-      <Text className="text-sm text-gray-500 leading-5" numberOfLines={2}>
-        {item.body}
-      </Text>
+      <TouchableOpacity onPress={()=>navigation.navigate("Post Details",{id:item.id})}>
+        <Text className="text-base font-bold text-gray-800 capitalize mb-2">{item.title}</Text>
+        <Text className="text-sm text-gray-500 leading-5" numberOfLines={2}>
+          {item.body}
+        </Text>
+      </TouchableOpacity>
 
       {/* Actions Bar */}
       <View className="flex-row justify-between items-center p-2 bg-[#313030] rounded-lg mt-2">

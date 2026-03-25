@@ -17,7 +17,6 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const token = useAppSelector((state) => state.auth.token);
   const {data:getPosts,isLoading,isError}=useGetAllPostQuery(undefined)
-  console.log(getPosts,"0-0-0");
 
 
   useLayoutEffect(() => {
