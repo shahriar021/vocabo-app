@@ -1,8 +1,9 @@
-// import * as Google from "expo-auth-session/providers/google";
+import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth'; 
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import React, { useLayoutEffect, useState } from "react";
-import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { ActivityIndicator, Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { setToken, setUserType, setId } from "src/redux/features/auth/authSlice";
 import { useLoginMutation } from "src/redux/features/auth/authApi";
@@ -17,13 +18,12 @@ const LoginScreen = () => {
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const [loginData] = useLoginMutation();
   const dispatch = useDispatch();
-  // const [request, response, promptAsync] = Google.useAuthRequest({
-  //   expoClientId: "YOUR_EXPO_CLIENT_ID.apps.googleusercontent.com",
-  //   androidClientId: "YOUR_ANDROID_CLIENT_ID.apps.googleusercontent.com",
-  //   iosClientId: "YOUR_IOS_CLIENT_ID.apps.googleusercontent.com",
-  // });
+
+
+
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -99,6 +99,8 @@ const LoginScreen = () => {
   //         Alert.alert("Error", errorMessage);
   //     }
   // };
+
+  
 
   const handleLogin = async () => {
     setLoading(true);

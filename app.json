@@ -12,7 +12,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "splash": {
       "image": "./assets/arkiveTransparent.png",
       "resizeMode": "contain",
@@ -58,16 +58,24 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
+      "@react-native-google-signin/google-signin",
+      "./plugins/withRootBuildGradle",
       [
         "expo-build-properties",
         {
           "android": {
-            "compileSdkVersion": 36,
-            "targetSdkVersion": 36,
-            "buildToolsVersion": "36.0.0",
-            "gradlePluginVersion": "8.9.1",
+            "ndkVersion": "27.1.12297006",
+            "agpVersion": "8.5.1",
             "kotlinVersion": "2.0.21",
-            "gradleVersion": "8.9"
+            "targetSdkVersion": 35,
+            "compileSdkVersion": 35,
+            "buildToolsVersion": "35.0.0",
+            "newArchEnabled": false,
+            "freeCompilerArgs": [
+              "-Xskip-prerelease-check",
+              "-P",
+              "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+            ]
           }
         }
       ],

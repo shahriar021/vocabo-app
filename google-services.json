@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "467343947871-31e04nfg1e5u7ph3avl701umv43689or.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Vocabo.sas",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "467343947871-at2lno34s9q7b1el9gv40lse5p2lcqke.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Vocabo.sas",
+            "certificate_hash": "1089f99087f87326f58994b9dca6f98a92847473"
+          }
+        },
+        {
           "client_id": "467343947871-khtlvmtl9v2o8fhhebf8u845qd1t2cg5.apps.googleusercontent.com",
           "client_type": 3
         }

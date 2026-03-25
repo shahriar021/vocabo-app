@@ -1,10 +1,9 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
-
+import { authInstance } from "../../firebaseConfig";
 
 export const signUpUser = async (email: string, password: string) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    // Native SDK calls the method on the auth instance
+    const userCredential = await authInstance.createUserWithEmailAndPassword(email, password);
     return userCredential.user;
   } catch (error: any) {
     throw new Error(error.message);
@@ -13,7 +12,7 @@ export const signUpUser = async (email: string, password: string) => {
 
 export const loginUser = async (email: string, password: string) => {
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await authInstance.signInWithEmailAndPassword(email, password);
     return userCredential.user;
   } catch (error: any) {
     throw new Error(error.message);
@@ -21,5 +20,9 @@ export const loginUser = async (email: string, password: string) => {
 };
 
 export const logoutUser = async () => {
-  await signOut(auth);
+  try {
+    await authInstance.signOut();
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
 };
