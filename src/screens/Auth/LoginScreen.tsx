@@ -5,10 +5,11 @@ import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } fro
 import { useDispatch } from "react-redux"
 import { setToken, setUserType,setId } from "src/redux/features/auth/authSlice";
 import { useLoginMutation } from "src/redux/features/auth/authApi"
-import { NavigationProp } from "src/types/auth"
+import { useAuth } from "src/hooks/useAuth"
 
 const LoginScreen = () => {
-    const navigation = useNavigation<NavigationProp>()
+  const { login } = useAuth();
+    const navigation = useNavigation()
     const [isType, setIsType] = useState<boolean>(false);
     const [userTypes, setUserTypes] = useState<string>("")
     const [email, setEmail] = useState<string>("");
