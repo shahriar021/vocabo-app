@@ -1,0 +1,27 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "jsx": "react",
+    "strict": false,
+    "strictNullChecks": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@native-env": [
+        "./env.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "nativewind-env.d.ts",
+    "*.d.ts"
+  ]
+}
