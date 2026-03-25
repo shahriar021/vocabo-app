@@ -1,4 +1,4 @@
-import * as Google from "expo-auth-session/providers/google";
+// import * as Google from "expo-auth-session/providers/google";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { useLayoutEffect, useState } from "react";
@@ -19,11 +19,11 @@ const LoginScreen = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [loginData] = useLoginMutation();
   const dispatch = useDispatch();
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    expoClientId: "YOUR_EXPO_CLIENT_ID.apps.googleusercontent.com",
-    androidClientId: "YOUR_ANDROID_CLIENT_ID.apps.googleusercontent.com",
-    iosClientId: "YOUR_IOS_CLIENT_ID.apps.googleusercontent.com",
-  });
+  // const [request, response, promptAsync] = Google.useAuthRequest({
+  //   expoClientId: "YOUR_EXPO_CLIENT_ID.apps.googleusercontent.com",
+  //   androidClientId: "YOUR_ANDROID_CLIENT_ID.apps.googleusercontent.com",
+  //   iosClientId: "YOUR_IOS_CLIENT_ID.apps.googleusercontent.com",
+  // });
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -121,15 +121,6 @@ const LoginScreen = () => {
         <Text className="mt-1 mb-2 text-[#FFFFFF] text-lg font-semibold">
           It is quick and easy to log in. Enter your email and password below.
         </Text>
-
-        <View className=" bg-[#2C2C2C] mt-3 mb-2 rounded-lg overflow-hidden flex-row items-center p-2">
-          <View className="flex-1">
-            <Text style={{ color: "#ADAEBC" }}>{userTypes ? userTypes : "Select Types"}</Text>
-          </View>
-          <TouchableOpacity onPress={() => setIsType(true)}>
-            <AntDesign name="downcircle" size={24} color="#626870" />
-          </TouchableOpacity>
-        </View>
 
         <View className="bg-[#2C2C2C] mt-3 mb-2 rounded-lg overflow-hidden flex-row items-center p-2">
           <TextInput

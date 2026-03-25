@@ -29,7 +29,6 @@
     "@stripe/stripe-react-native": "0.45.0",
     "dayjs": "^1.11.13",
     "expo": "~53.0.27",
-    "expo-auth-session": "^55.0.9",
     "expo-build-properties": "~0.14.8",
     "expo-checkbox": "~4.1.4",
     "expo-dev-client": "~5.2.4",
