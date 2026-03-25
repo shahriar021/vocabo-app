@@ -10,13 +10,6 @@ import { useAppSelector } from "src/redux/hooks";
 const Stack = createStackNavigator();
 
 const StackNavigation = () => {
-  const userType = useAppSelector((store)=>store?.auth?.userType)
-  
-
-
-  if(!userType){
-    return <ActivityIndicator size="large"/>
-  }
 
   return (
     <>

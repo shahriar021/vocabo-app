@@ -32,7 +32,6 @@
         "backgroundColor": "#000"
       },
       "permissions": [
-        
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.READ_MEDIA_IMAGES"
@@ -48,7 +47,10 @@
               "scheme": "staark"
             }
           ],
-          "category": ["BROWSABLE", "DEFAULT"]
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
       ]
     },
@@ -56,38 +58,37 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      
-      "@react-native-firebase/app",
-      
-
-      [
-        "react-native-share",
-        {
-          "ios": ["fb", "instagram", "twitter", "tiktoksharesdk"],
-          "android": ["com.facebook.katana", "com.instagram.android", "com.twitter.android", "com.zhiliaoapp.musically"],
-          "enableBase64ShareAndroid": true
-        }
-      ],
-      
-     
-      
       [
         "expo-build-properties",
         {
           "android": {
-            "ndkVersion": "27.1.12297006",
-            "agpVersion": "8.5.1",
+            "compileSdkVersion": 36,
+            "targetSdkVersion": 36,
+            "buildToolsVersion": "36.0.0",
+            "gradlePluginVersion": "8.9.1",
             "kotlinVersion": "2.0.21",
-            "targetSdkVersion": 35,
-            "compileSdkVersion": 35,
-            "buildToolsVersion": "35.0.0",
-            "newArchEnabled": false,
-            "freeCompilerArgs": [
-              "-Xskip-prerelease-check",
-              "-P",
-              "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
-            ]
+            "gradleVersion": "8.9"
           }
+        }
+      ],
+      "@react-native-firebase/app",
+      "@react-native-google-signin/google-signin",
+      [
+        "react-native-share",
+        {
+          "ios": [
+            "fb",
+            "instagram",
+            "twitter",
+            "tiktoksharesdk"
+          ],
+          "android": [
+            "com.facebook.katana",
+            "com.instagram.android",
+            "com.twitter.android",
+            "com.zhiliaoapp.musically"
+          ],
+          "enableBase64ShareAndroid": true
         }
       ],
       [
@@ -110,9 +111,8 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "a85a43b9-4bdc-4ae7-bc58-98b35eed0ecb"
+        "projectId": "b736ac17-c582-4b73-987a-99228ec8223b"
       }
-    },
-    "owner": "bdcalling"
+    }
   }
 }

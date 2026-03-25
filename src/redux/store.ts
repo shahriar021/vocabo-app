@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { baseApi } from "./createdApi/baseApi";
 import authReducer from "./features/auth/authSlice";
-import pickerReducer from "./features/picker/pickerSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   persistReducer,
@@ -29,7 +28,6 @@ const notificationPersistConfig = {
 // Persisted Reducers
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
-  picker: pickerReducer,
   auth: persistReducer(authPersistConfig, authReducer),
 });
 

@@ -11,10 +11,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import { scale, verticalScale } from "react-native-size-matters";
-import { NavigationProp } from "src/types/auth";
 
 const OnBoarding = () => {
-  const navigation = useNavigation<NavigationProp>()
+  const navigation = useNavigation()
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -51,18 +50,7 @@ const OnBoarding = () => {
             <Text className="text-white text-lg font-instrumentSansBold">Log In</Text>
           </TouchableOpacity>
 
-          <View className="w-full mt-2 rounded-lg overflow-hidden mb-2">
-            <LinearGradient
-              colors={["#fff", "#fff"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              className="w-full rounded-lg mt-2 overflow-hidden"
-            >
-              <TouchableOpacity className="w-full items-center p-3 rounded-lg bg-transparent overflow-hidden" onPress={() => navigation.navigate("Sign Up as Brand")}>
-                <Text className="text-black font-semibold font-instrumentSansBold">Create Brand Account</Text>
-              </TouchableOpacity>
-            </LinearGradient>
-          </View>
+          
 
           <TouchableOpacity className="mt-2 mb-2 border border-[#FFFFFF] w-full items-center p-3 rounded-lg" onPress={() => navigation.navigate("Sign Up as User")}>
             <Text className="text-white font-instrumentSansBold">Sign Up as User</Text>
