@@ -3,9 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Image, Platform, Text, useWindowDimensions, View } from "react-native";
 const BottomTabs = createBottomTabNavigator();
 import { TouchableOpacity } from 'react-native';
-import { HomeScreen } from "src/screens";
-import { DrawerNavigation } from "./DrawerNavigation";
-import Profile from "src/screens/Profile/Profile";
+import { HomeScreen,Profile } from "src/screens";
 
 const CustomTabBarButton = ({ children, onPress, accessibilityState }: any) => {
   const focused = accessibilityState?.selected;
