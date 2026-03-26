@@ -178,6 +178,12 @@ RootNavigator
 
 ---
 
+## 🌐 Network Status (NetInfo + Context)
+
+Network state is monitored globally using `@react-native-community/netinfo` and exposed via React Context. This powers the `OfflineBanner` component which automatically appears across all screens when the device loses connectivity — no prop-drilling required.
+
+---
+
 ## 🤖 AI Usage in This Project
 
 AI tooling was used deliberately to accelerate specific parts of development without replacing engineering judgment.
