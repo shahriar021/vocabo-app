@@ -1,23 +1,22 @@
-import React from "react"
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Image, Platform, Text, useWindowDimensions, View } from "react-native";
+import { Image, Platform, Text, useWindowDimensions, View, TouchableOpacity } from "react-native";
+import { HomeScreen, Profile } from "src/screens";
+
 const BottomTabs = createBottomTabNavigator();
-import { TouchableOpacity } from 'react-native';
-import { HomeScreen,Profile } from "src/screens";
 
 const CustomTabBarButton = ({ children, onPress, accessibilityState }: any) => {
   const focused = accessibilityState?.selected;
-
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={1}
       style={{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         borderTopWidth: 5,
-        borderTopColor: focused ? '#1D3725' : 'transparent',
+        borderTopColor: focused ? "#1D3725" : "transparent",
       }}
     >
       {children}
@@ -26,12 +25,10 @@ const CustomTabBarButton = ({ children, onPress, accessibilityState }: any) => {
 };
 
 export const BottomNavigation = () => {
-
   const { width } = useWindowDimensions();
 
   return (
-    <View className="bg-transparent flex-1">
-      {/* @ts-ignore */}
+    <View style={{ flex: 1, backgroundColor: "transparent" }}>
       <BottomTabs.Navigator
         screenOptions={{
           tabBarShowLabel: false,
@@ -42,7 +39,7 @@ export const BottomNavigation = () => {
             paddingBottom: 7,
             height: 72,
             backgroundColor: "#121212",
-            overflow: "hidden"
+            overflow: "hidden",
           },
           tabBarLabelStyle: {
             fontSize: width > 450 ? 14 : 10,
@@ -50,16 +47,13 @@ export const BottomNavigation = () => {
           },
           tabBarActiveTintColor: "#FFFFFF",
           tabBarInactiveTintColor: "#C5BAFF",
+          tabBarLabelPosition: "below-icon",
           headerStyle: {
+            backgroundColor: "#121212",
             elevation: 0,
             shadowOpacity: 0,
             borderBottomWidth: 0,
           },
-          headerTitleStyle: {
-            fontFamily: "HelveticaNeue-Black",
-            
-          },
-          tabBarLabelPosition: "below-icon",
           headerTintColor: "#5b21b6",
         }}
       >
@@ -68,27 +62,49 @@ export const BottomNavigation = () => {
           component={HomeScreen}
           options={{
             headerShown: true,
-            headerTitle: () => null,
+            headerTitle: "Vocabo",
+            headerTitleAlign: "left",
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "instrumentSans-Bold",
+              fontSize: 20,
+            },
             tabBarIcon: ({ focused }) => (
-              <View style={{ alignItems: "center" }} className="">
-                <Image source={require("../../assets/home/home-olive.png")} style={{ width: 24, height: 24 }} />
-                {focused && <Text className="text-center w-[50]" style={{ color: "#2ECC71", fontSize: 10 }}>Home</Text>}
+              <View style={{ alignItems: "center" }}>
+                <Image
+                  source={require("../../assets/home/home-olive.png")}
+                  style={{ width: 24, height: 24 }}
+                />
+                {focused && (
+                  <Text style={{ color: "#2ECC71", fontSize: 10 }}>Home</Text>
+                )}
               </View>
             ),
             tabBarButton: (props) => <CustomTabBarButton {...props} />,
           }}
         />
-        
+
         <BottomTabs.Screen
           name="Profile"
           component={Profile}
           options={{
             headerShown: true,
+            headerTitle: "Profile",
+            headerTitleAlign: "left",
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "instrumentSans-Bold",
+              fontSize: 20,
+            },
             tabBarIcon: ({ focused }) => (
-              <View style={{ alignItems: "center" }} className="">
-
-                <Image source={require("../../assets/home/profile-olive.png")} style={{ width: 24, height: 24 }} />
-                {focused && <Text className="text-center w-[50]" style={{ color: "#2ECC71", fontSize: 10 }}>Profile</Text>}
+              <View style={{ alignItems: "center" }}>
+                <Image
+                  source={require("../../assets/home/profile-olive.png")}
+                  style={{ width: 24, height: 24 }}
+                />
+                {focused && (
+                  <Text style={{ color: "#2ECC71", fontSize: 10 }}>Profile</Text>
+                )}
               </View>
             ),
             tabBarButton: (props) => <CustomTabBarButton {...props} />,

@@ -98,12 +98,14 @@ const OnBoarding = () => {
             title="Log In"
             onPress={() => navigation.navigate("Login Screen")}
             className="mt-5 mb-2 border border-white"
+            textClass="text-white"
           />
 
           <PrimaryButton
             title="Sign Up"
             onPress={() => navigation.navigate("Sign Up as User")}
             className="mt-2 mb-2 border border-white"
+            textClass="text-white"
           />
           <View className="flex-row items-center w-full my-3">
             <View className="flex-1 h-px bg-white/20" />

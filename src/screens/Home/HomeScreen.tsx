@@ -1,5 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import {
   View,
   FlatList,
@@ -11,26 +10,7 @@ import Loading from "src/components/shared/Loading";
 import ErrorMessage from "src/components/shared/ErrorMessage";
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
   const { data: getPosts, isLoading, isError, refetch } = useGetAllPostQuery(undefined)
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerStyle: {
-        backgroundColor: "#121212",
-        elevation: 0,
-        shadowOpacity: 0,
-        borderBottomWidth: 0
-      },
-      headerTitle: 'Vocabo',
-      headerTitleAlign: "left",
-      headerTitleStyle: {
-        color: "white",
-        fontFamily: 'instrumentSans-Bold',
-        fontSize: 20
-      }
-    })
-  }, [navigation])
 
   if (isLoading) return <Loading />
   if (isError) return <ErrorMessage onRetry={refetch} />

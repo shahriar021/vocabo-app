@@ -17,11 +17,11 @@ const PrimaryButton = ({
       className={`flex-row gap-3 items-center justify-center w-full p-3 rounded-lg ${className}`}
     >
       {loading ? (
-        <ActivityIndicator size="small" color="#fff" />
+        <ActivityIndicator size="small" color="#2F6B3F" />
       ) : (
         <>
         {icon && <>{icon}</>}
-        <Text className={`text-white text-lg font-instrumentSansBold ${textClass}`}>
+        <Text className={` text-lg font-bold ${textClass}`}>
           {title}
         </Text>
         </>
